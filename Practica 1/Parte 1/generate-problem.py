@@ -171,8 +171,9 @@ def main():
         sys.exit(1)
 
     if options.carriers is None:
-        print("You must specify --carriers (use --help for help)")
-        sys.exit(1)
+        #print("You must specify --carriers (use --help for help)")
+        #sys.exit(1)
+        pass
 
     if options.locations is None:
         print("You must specify --locations (use --help for help)")
@@ -269,6 +270,8 @@ def main():
 
         for x in drone:
             f.write("\t" + x + " - drone\n")
+        
+        f.write("\tdepot - deposit\n")
 
         for x in location:
             f.write("\t" + x + " - location\n")
@@ -292,7 +295,33 @@ def main():
 
         f.write("(:init\n")
 
-        # TODO: Initialize all facts here!
+        for x in drone:
+            f.write("\t(drone-in-deposit " + x + " depot)\n")
+            f.write("\t(drone-free " + x + ")\n")
+
+        f.write("\n")
+
+        for x in crate:
+            f.write("\t(crate-in-deposit " + x + " depot)\n")
+
+            content = random.choice(content_types)
+            f.write("\t(crate-content " + x + " " + content + ")\n\n")
+
+        f.write("\n")
+
+        for x in person:
+            loc = random.choice(location)
+            f.write("\t(person-in-location " + x + " " + loc + ")\n")
+
+        f.write("\n")
+
+        for x in range(options.persons):
+            for y in range(len(content_types)):
+                if need[x][y]:
+                    person_name = person[x]
+                    content_name = content_types[y]
+                    f.write("\t(person-needs " + person_name + " " + content_name + ")\n")
+        
 
         f.write(")\n")
 
@@ -304,15 +333,14 @@ def main():
         # All Drones should end up at the depot
         for x in drone:
             f.write("\n")
-            # TODO: Write a goal that the drone x is at the depot
+            f.write("\t(drone-in-deposit " + x + " depot)\n\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
                 if need[x][y]:
                     person_name = person[x]
                     content_name = content_types[y]
-                    # TODO: write a goal that the person needs a crate
-                    # with this specific content
+                    f.write("\t(person-has-crate-with-content " + person_name + " " + content_name + ")\n")
 
         f.write("\t))\n")
         f.write(")\n")
