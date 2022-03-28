@@ -1,7 +1,7 @@
 
 (define (domain drones2-actions)
 
-    (:requirements :strips :fluents :typing :action-costs)
+    (:requirements :strips :typing :action-costs)
 
     (:types 
         deposit drone location crate contents person carrier num - object

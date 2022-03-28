@@ -375,6 +375,8 @@ def main():
                     f.write("\t(person-has-crate-with-content " + person_name + " " + content_name + ")\n")
 
         f.write("\t))\n")
+        f.write("(:metric minimize (total-cost)")
+        f.write("\n)")
         f.write(")\n")
 
 

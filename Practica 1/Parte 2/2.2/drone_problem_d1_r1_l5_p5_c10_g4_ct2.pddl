@@ -86,7 +86,7 @@
 
 	(carrier-capacity carrier1 n0)
 
-	(= (fly-cost-deposit-deposit depot depot) 0)
+	(= (fly-cost-deposit-deposit depot depot) 1)
 	(= (fly-cost-deposit depot loc1) 185)
 	(= (fly-cost-deposit depot loc2) 113)
 	(= (fly-cost-deposit depot loc3) 238)
@@ -127,4 +127,8 @@
 	(person-has-crate-with-content person4 food)
 	(person-has-crate-with-content person5 food)
 	))
+
+(:metric minimize (total-cost))
 )
+
+
