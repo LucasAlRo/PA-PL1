@@ -219,6 +219,7 @@ def main():
     crate = []
     carrier = []
     location = []
+    nums = []
 
     for x in range(options.locations):
         location.append("loc" + str(x + 1))
@@ -267,6 +268,8 @@ def main():
         # TODO: Change the type names below (drone, location, ...)
         # to suit your domain.
 
+        carrier_capacity = 4
+
         for x in drone:
             f.write("\t" + x + " - drone\n")
         
@@ -286,6 +289,10 @@ def main():
 
         for x in carrier:
             f.write("\t" + x + " - carrier\n")
+
+        for x in range(carrier_capacity + 1):
+            f.write("\t" + "n" + str(x) + " - num\n")
+            nums.append("n" + str(x))
 
         f.write(")\n")
 
@@ -322,10 +329,16 @@ def main():
                     f.write("\t(person-needs " + person_name + " " + content_name + ")\n")
 
         for x in range(options.carriers):
-            carrier_capacity = 4
             carrier_name = carrier[x]
             f.write("\t(carrier-in-deposit " + carrier_name + " depot)\n")
-            f.write("\t(= (carrier-capacity " + carrier_name + ") " + str(carrier_capacity) + ")\n")
+
+        f.write("\n")
+
+        for x in range(carrier_capacity + 1):
+            try:
+                f.write("\t(next " + nums[x] + " " + nums[x + 1] + ")\n")
+            except:
+                pass
         
 
         f.write(")\n")
