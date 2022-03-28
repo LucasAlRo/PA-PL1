@@ -1,5 +1,5 @@
 
-(define (domain drones2)
+(define (domain drones2-desactivado)
 
     (:requirements :strips :fluents :typing)
 
@@ -21,7 +21,7 @@
         (crate-in-carrier ?cr - crate ?c - carrier)
         (carrier-in-location ?c - carrier ?l - location)
         (next ?n1 ?n2 - num)
-        (carrier-capacity ?n - num)
+        (carrier-capacity ?c - carrier ?n - num)
         
     )
 
@@ -44,11 +44,11 @@
             (drone-has-crate ?dr ?cr)
             (drone-in-deposit ?dr ?d)
             (carrier-in-deposit ?c ?d)
-            (carrier-capacity ?actualNum)
+            (carrier-capacity ?c ?actualNum)
             (next ?actualNum ?newNum)
         )
         :effect (and 
-            (carrier-capacity ?newNum)
+            (carrier-capacity ?c ?newNum)
             (crate-in-carrier ?cr ?c)
             (not(drone-has-crate ?dr ?cr))
             (drone-free ?dr)
@@ -66,6 +66,7 @@
             (not (carrier-in-deposit ?c ?d))
             (not (drone-in-deposit ?dr ?d))
             (carrier-in-location ?c ?l)
+            (drone-in-location ?dr ?l)
         )
     )
     
@@ -106,14 +107,14 @@
             (drone-in-location ?dr ?l)
             (carrier-in-location ?c ?l)
             (crate-in-carrier ?cr ?c)
-            (carrier-capacity ?actualNum)
+            (carrier-capacity ?c ?actualNum)
             (next ?newNum ?actualNum)
         )
         :effect (and
             (not (drone-free ?dr))
             (drone-has-crate ?dr ?cr)
             (not (crate-in-carrier ?cr ?c)) 
-            (carrier-capacity ?newNum)
+            (carrier-capacity ?c ?newNum)
         )
     )
     
@@ -131,35 +132,5 @@
         (drone-free ?dr)
         (not (drone-has-crate ?dr ?c))
     ))
-    
-    (:action fly-over-from-deposit
-    :parameters (?dr - drone ?de - deposit ?l - location)
-    :precondition (and  
-        (drone-in-deposit ?dr ?de)
-    )
-    :effect (and 
-        (not (drone-in-deposit ?dr ?de))
-        (drone-in-location ?dr ?l)
-    ))  
-
-    (:action fly-over-to-deposit
-    :parameters (?dr - drone ?de - deposit ?l - location)
-    :precondition (and  
-        (drone-in-location ?dr ?l)
-    )
-    :effect (and 
-        (not (drone-in-location ?dr ?l))
-        (drone-in-deposit ?dr ?de)
-    ))
-
-    (:action fly-over-from-location
-    :parameters (?dr - drone ?ol - location ?dl - location)
-    :precondition (and  
-        (drone-in-location ?dr ?ol)
-    )
-    :effect (and 
-        (not (drone-in-location ?dr ?ol))
-        (drone-in-location ?dr ?dl)
-    ))   
 
 )

@@ -1,4 +1,4 @@
-(define (problem drone_problem_d1_r1_l5_p5_c10_g5_ct2)
+(define (problem drone_problem_d1_r1_l5_p5_c10_g4_ct2)
 (:domain drones2)
 (:objects
 	drone1 - drone
@@ -46,7 +46,7 @@
 	(crate-content crate3 medicine)
 
 	(crate-in-deposit crate4 depot)
-	(crate-content crate4 medicine)
+	(crate-content crate4 food)
 
 	(crate-in-deposit crate5 depot)
 	(crate-content crate5 food)
@@ -64,19 +64,18 @@
 	(crate-content crate9 food)
 
 	(crate-in-deposit crate10 depot)
-	(crate-content crate10 food)
+	(crate-content crate10 medicine)
 
 
-	(person-in-location person1 loc1)
-	(person-in-location person2 loc1)
-	(person-in-location person3 loc3)
-	(person-in-location person4 loc4)
+	(person-in-location person1 loc4)
+	(person-in-location person2 loc4)
+	(person-in-location person3 loc2)
+	(person-in-location person4 loc3)
 	(person-in-location person5 loc2)
 
 	(person-needs person1 food)
-	(person-needs person2 medicine)
-	(person-needs person3 food)
-	(person-needs person3 medicine)
+	(person-needs person2 food)
+	(person-needs person4 food)
 	(person-needs person4 medicine)
 	(carrier-in-deposit carrier1 depot)
 
@@ -92,9 +91,8 @@
 	(drone-in-deposit drone1 depot)
 
 	(person-has-crate-with-content person1 food)
-	(person-has-crate-with-content person2 medicine)
-	(person-has-crate-with-content person3 food)
-	(person-has-crate-with-content person3 medicine)
+	(person-has-crate-with-content person2 food)
+	(person-has-crate-with-content person4 food)
 	(person-has-crate-with-content person4 medicine)
 	))
 )

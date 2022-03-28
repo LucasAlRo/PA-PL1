@@ -340,6 +340,11 @@ def main():
             except:
                 pass
         
+        f.write("\n")
+
+        for x in (carrier):
+            f.write("\t(carrier-capacity " + x + " n0)\n")
+        
 
         f.write(")\n")
 
