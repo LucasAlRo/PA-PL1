@@ -258,7 +258,7 @@ def main():
         # Write the initial part of the problem
 
         f.write("(define (problem " + problem_name + ")\n")
-        f.write("(:domain drones)\n")
+        f.write("(:domain drones2)\n")
         f.write("(:objects\n")
 
         ######################################################################
@@ -320,6 +320,12 @@ def main():
                     person_name = person[x]
                     content_name = content_types[y]
                     f.write("\t(person-needs " + person_name + " " + content_name + ")\n")
+
+        for x in range(options.carriers):
+            carrier_capacity = 4
+            carrier_name = carrier[x]
+            f.write("\t(carrier-in-deposit " + carrier_name + " depot)\n")
+            f.write("\t(= (carrier-capacity " + carrier_name + ") " + str(carrier_capacity) + ")\n")
         
 
         f.write(")\n")

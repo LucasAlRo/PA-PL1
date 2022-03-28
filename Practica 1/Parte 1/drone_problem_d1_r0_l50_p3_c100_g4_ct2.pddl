@@ -3,7 +3,6 @@
 (:objects
 	drone1 - drone
 	depot - deposit
-	depot - location
 	loc1 - location
 	loc2 - location
 	loc3 - location
